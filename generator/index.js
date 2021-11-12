@@ -57,13 +57,6 @@ module.exports = (api, options, rootOptions) => {
             "vue-template-compiler": "^2.6.11"
         }
     });
-    // 删除 vue-cli3 默认目录
-    // api.render(files => {
-    //     Object.keys(files)
-    //         .filter(path => path.startsWith('src/') || path.startsWith('public/'))
-    //         .forEach(path => delete files[path])
-    //     console.log(Object.keys(files))
-    // })
     api.render('../template');
     api.onCreateComplete(() => {
         process.env.VUE_CLI_SKIP_WRITE = true;
