@@ -64,11 +64,11 @@ function checkStatus (response) {
     }
     if(res.msg == 'Signature has expired' || res.code == 1001 ){
       res.msg = '用户过期';
-      common.delCookie('_KPRDATA');
+      common.delCookie('_KEYDATA');
       store.commit('setToken',undefined);
       window.location.href = '/#/login';
     }
-    if(res.msg == 'Wrong number of segments' && common.getCookie('_KPRDATA') == null ){
+    if(res.msg == 'Wrong number of segments' && common.getCookie('_KEYDATA') == null ){
         window.location.href = '/#/login';
     }
     let msg = res;
