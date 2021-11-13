@@ -1,16 +1,13 @@
 <template>
   <div class="not">
-    404
+    404 Not Found
   </div>
 </template>
-
 <script>
 export default {
   name: 'NotAuth'
 }
 </script>
-
-<!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
 
 </style>

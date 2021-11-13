@@ -1,5 +1,6 @@
 import store from '@/store/index'
 export default {
+    cfmcfg:{confirmButtonText: '确定',cancelButtonText:'取消',type: 'warning'},
     //cookie 操作
     //s20是代表20秒
     //h是指小时，如12小时则是：h12
