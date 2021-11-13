@@ -20,5 +20,5 @@ vue create --preset adongge/vue-base-template test
 ```
 
 ## 创建的页面
-- /login [登录]
-- /admin [管理首页]
+- / [首页菜单]
+- /login [登录/退出]
