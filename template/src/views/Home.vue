@@ -20,6 +20,7 @@
                 <div class="fixclear"></div>
             </div>
             <div class="content">
+                <reference></reference>
                 <router-view></router-view>
             </div>
         </div>
@@ -29,9 +30,10 @@
 import common from "@/util/common";
 import {mapMutations} from 'vuex';
 import Left from '@/components/Left.vue';
+import Reference from '../components/Reference.vue';
 export default {
     name: "Home",
-    components: {Left},
+    components: {Left, Reference},
     data() {
         return {
             isCollapse: false,

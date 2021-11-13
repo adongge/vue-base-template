@@ -1,7 +1,6 @@
 import Home from '../views/Home'
 import Login from '@/components/Login'
 import NotAuth from '@/components/NotAuth'
-import Reference from '@/components/Reference'
 
 const config = [
     {
@@ -9,7 +8,7 @@ const config = [
         name: 'Home',
         component: Home,
         children: [
-            { path: '/reference', name: 'reference', component:Reference, meta:{ requireAuth: true,title:'参考' } }
+            // { path: '/user', name: 'user', component:User, meta:{ requireAuth: true, title:'参考' } }
         ]
     },
     {

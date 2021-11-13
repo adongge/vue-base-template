@@ -11,7 +11,7 @@
             <template v-for="(item, index) in menus">
                 <el-submenu v-if="item.children && item.children.length>0" :key="index" :index="'menu-'+index">
                     <template slot="title">
-                        <i class="el-icon-location"></i>
+                        <i :class="item.icon"></i>
                         <span slot="title">{{item.title}}</span>
                     </template>
                     <el-menu-item v-for="(children, sub) in item.children" :key="sub" :index="children.index">
@@ -19,7 +19,7 @@
                     </el-menu-item>
                 </el-submenu>
                 <el-menu-item v-else :key="index" :index="item.index">
-                    <i class="el-icon-menu"></i>
+                    <i :class="item.icon"></i>
                     <span slot="title">{{item.title}}</span>
                 </el-menu-item>
             </template>
@@ -36,25 +36,28 @@ export default {
         return {
             menus:[
                 {
-                    title: '菜单',
+                    title: '参考',
                     index: '/',
+                    icon: 'el-icon-info',
+                },
+                {
+                    title: '菜单',
+                    index: '/home',
+                    icon: 'el-icon-menu',
                     children: [
                         {
-                            title: '参考',
-                            index: '/reference',
+                            title: '子菜单',
+                            index: '/reference'
                         }
                     ]
                 },
                 {
-                    title: '导航二',
-                    index: '/',
-                },
-                {
-                    title: '导航三',
+                    title: '登录',
                     index: '/login',
+                    icon: 'el-icon-user'
                 }
             ],
-            active: '/'
+            active: '/reference'
         };
     },
     mounted(){

@@ -16,7 +16,7 @@
         <div>
             移动参考：<a target="_blank" href="https://youzan.github.io/vant/?source=vuejsorg#/zh-CN/home">Vant-UI</a>
         </div>
-        <h3>其他常用擦考：</h3>
+        <h3>(手动引入)其他常用：</h3>
         <div>
             <a target="_blank" href="https://echarts.apache.org/handbook/zh/basics/download">ECharts</a>
         </div>
