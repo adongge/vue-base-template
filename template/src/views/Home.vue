@@ -67,7 +67,6 @@ export default {
 .right {
     margin-left: 200px;
     min-width: 1000px;
-    height: 500px;
     padding:5px;
 }
 .right-collapse{
