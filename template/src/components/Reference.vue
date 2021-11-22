@@ -23,6 +23,7 @@
         <div>
             <a target="_blank" href="https://www.highcharts.com.cn/docs/install-from-npm">highcharts</a>
         </div>
+        <img alt="Vue logo" src="../assets/logo.png">
     </div>
 </template>
 <script>
