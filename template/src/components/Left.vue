@@ -46,8 +46,11 @@ export default {
                     icon: 'el-icon-menu',
                     children: [
                         {
-                            title: '子菜单',
-                            index: '/reference'
+                            title: 'hello',
+                            index: '/helloworld'
+                        },{
+                            title: 'about',
+                            index: '/about'
                         }
                     ]
                 },
@@ -74,7 +77,7 @@ export default {
 .left,
 .el-menu-vertical:not(.el-menu--collapse) {
     width: 200px;
-    min-height: 400px;
+    min-height: 600px;
     float: left;
 }
 .el-menu{border-right:0 !important;}
