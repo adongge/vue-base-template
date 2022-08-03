@@ -22,3 +22,5 @@ vue create --preset adongge/vue-base-template test
 ## 创建的页面
 - / [首页菜单]
 - /login [登录/退出]
+
+ [![template](https://adong.wiki/static/images/md/2021110102.png)](https://adong.wiki/static/images/md/2021110102.png)
