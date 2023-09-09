@@ -41,7 +41,7 @@ export default {
             menus:[
                 {
                     name: '参考',
-                    value: '/',
+                    value: '/reference',
                     icon: 'el-icon-info',
                 },
                 {
@@ -64,7 +64,7 @@ export default {
                     icon: 'el-icon-user'
                 }
             ],
-            active: '/reference'
+            active: ''
         };
     },
     mounted(){

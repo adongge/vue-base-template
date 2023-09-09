@@ -2,6 +2,7 @@ import Home from '../views/Home'
 import Login from '@/components/Login'
 import NotAuth from '@/components/NotAuth'
 import HelloWorld from '@/components/HelloWorld'
+import Reference from '@/components/Reference'
 
 
 const config = [
@@ -11,7 +12,8 @@ const config = [
         component: Home,
         children: [
             // { path: '/user', name: 'user', component:User, meta:{ requireAuth: true, title:'参考' } },
-            { path: '/helloworld', name: 'helloworld', component:HelloWorld, meta:{ title:'参考' } }
+            { path: '/helloworld', name: 'helloworld', component:HelloWorld, meta:{ title:'首页' } },
+            { path: '/reference', name: 'reference', component:Reference, meta:{ title:'参考' } },
         ]
     },
     {
