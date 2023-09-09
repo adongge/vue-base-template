@@ -38,27 +38,27 @@ export default {
         return {
             menus:[
                 {
-                    title: '参考',
-                    index: '/',
+                    name: '参考',
+                    value: '/',
                     icon: 'el-icon-info',
                 },
                 {
-                    title: '菜单',
-                    index: '/home',
+                    name: '菜单',
+                    value: '/home',
                     icon: 'el-icon-menu',
                     children: [
                         {
-                            title: 'hello',
-                            index: '/helloworld'
+                            name: 'hello',
+                            value: '/helloworld'
                         },{
-                            title: 'about',
-                            index: '/about'
+                            name: 'about',
+                            value: '/about'
                         }
                     ]
                 },
                 {
-                    title: '登录',
-                    index: '/login',
+                    name: '登录',
+                    value: '/login',
                     icon: 'el-icon-user'
                 }
             ],
