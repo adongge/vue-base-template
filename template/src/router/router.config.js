@@ -4,6 +4,8 @@ import NotAuth from '@/components/NotAuth'
 import HelloWorld from '@/components/HelloWorld'
 import Reference from '@/components/Reference'
 
+import Admin from '@/views/admin/Admin'
+import Role from '@/views/admin/Role'
 
 const config = [
     {
@@ -11,9 +13,11 @@ const config = [
         name: 'Home',
         component: Home,
         children: [
-            // { path: '/user', name: 'user', component:User, meta:{ requireAuth: true, title:'参考' } },
             { path: '/helloworld', name: 'helloworld', component:HelloWorld, meta:{ title:'首页' } },
             { path: '/reference', name: 'reference', component:Reference, meta:{ title:'参考' } },
+
+            { path: '/admin/admin', name: 'admin', component:Admin, meta:{ title:'管理员' } },
+            { path: '/admin/role', name: 'role', component:Role, meta:{ title:'角色' } },
         ]
     },
     {
