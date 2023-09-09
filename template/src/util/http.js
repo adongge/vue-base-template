@@ -42,9 +42,26 @@ axios.interceptors.response.use(response => {
   }
   store.dispatch('closeLoading')
   let response = error.response || error
+
   console.log(response)
   Message.closeAll()
   Message.error(response?.data?.msg|| '服务器错误，请稍后尝试！')
+
+  // setTimeout(() => {
+
+  //   let res = response.data||response;
+  //   if(res.msg == 'Signature has expired' || res.code == 1001 ){
+  //     res.msg = '用户过期'
+  //     common.delCookie(common.dataKey)
+  //     store.commit('setToken',undefined)
+  //     window.location.href = '/index.html/#/login'
+  //   }
+  //   if(res.msg == 'Wrong number of segments' && common.getCookie(common.dataKey) == null ){
+  //       window.location.href = '/index.html/#/login'
+  //   }
+
+  // }, 1000)
+
   return Promise.reject(response)
 })
 
@@ -58,19 +75,7 @@ function checkStatus (response, resolve, reject) {
   if ( response && ( response.code === 0 ) ) {
     return resolve(response) // 直接返回http response响应的data,此data会后端返回的数据数据对象，包含后端自定义的code,message,data属性
   }else{
-    let res = response.data||response;
-    if(res.msg == 'Signature has expired' || res.code == 1001 ){
-      res.msg = '用户过期'
-      common.delCookie(common.dataKey)
-      store.commit('setToken',undefined)
-      window.location.href = '/index.html/#/login'
-    }
-    if(res.msg == 'Wrong number of segments' && common.getCookie(common.dataKey) == null ){
-        window.location.href = '/index.html/#/login'
-    }
-    Message.closeAll()
-    Message.error(msg)
-    console.error(msg)
+    console.log(response)
     return reject(res)
   }
 }
