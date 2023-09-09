@@ -2,7 +2,7 @@
     <section class="login">
         <el-card shadow="hover" body-style="padding: 25px;">
             <div class="logo">
-                <img src="https://static.manguoguo.com/logo.png" alt="">
+                
             </div>
             <h1>流量业务管理平台</h1>
             <el-form ref="form" :model="user" label-width="80px" :rules="rules">
