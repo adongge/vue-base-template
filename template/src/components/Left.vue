@@ -1,6 +1,8 @@
 <template>
     <div :class="'left'+(isCollapse?' left-collapse':'')">
-        <div class="logo"> LOGO </div>
+        <div class="logo">
+            <img src="../assets/logo.png" alt="">
+        </div>
         <el-menu
         :default-active="active"
         class="el-menu-vertical"
@@ -18,7 +20,7 @@
                         <span slot="title">{{children.name}}</span>
                     </el-menu-item>
                 </el-submenu>
-                <el-menu-item v-else  :index="item.index" :key="index">
+                <el-menu-item v-else  :index="item.value" :key="index">
                     <i :class="item.icon"></i>
                     <span slot="title">{{item.name}}</span>
                 </el-menu-item>
@@ -81,7 +83,7 @@ export default {
     }
 }
 </script>
-<style scoped>
+<style scoped lang="less">
 .left,
 .el-menu-vertical:not(.el-menu--collapse) {
     width: 200px;
