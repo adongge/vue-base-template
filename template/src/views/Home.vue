@@ -5,7 +5,7 @@
             <div class="top text-primary">
                 <div class="icon">
                     <span class="btn-collapse" @click="collapse">
-                        <i :class="'el-icon-arrow-'+(isCollapse?'right':'left')"></i>
+                        <i :class="(isCollapse?'el-icon-tickets':'el-icon-notebook-2')"></i>
                     </span>
                     {{ $route.meta.title }}
                 </div>
@@ -13,14 +13,13 @@
                     <span class="btn-user" @mousemove="act(true)" @mouseout="act(false)">
                         <i class="el-icon-user-solid"></i>
                         <div id="_act-menu" class="act-menu" v-show="showAct" >
-                            <div @click="logout"><i class="fa fa-sign-out"></i>退出登录</div>
+                            <div @click="logout"><i class="el-icon-caret-right"></i>退出登录</div>
                         </div>
                     </span>
                 </div>
                 <div class="fixclear"></div>
             </div>
             <div class="content">
-                <reference></reference>
                 <router-view></router-view>
             </div>
         </div>
@@ -52,7 +51,7 @@ export default {
         },
         logout() {
             this.$confirm('确认要退出吗？', '提示',common.cfmcfg).then(() => {
-                common.delCookie('_KEYDATA');
+                common.delCookie(common.dataKey);
                 this.setToken(false);
                 window.location.href = '/#/login';
             }).catch((err) => {

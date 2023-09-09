@@ -11,8 +11,8 @@ const router = new VueRouter({
     routes: (() => routerGroup)()
 })
 
-if (common.getCookie('_KEYDATA')) {
-    store.commit('setToken', common.getCookie('_KEYDATA'))
+if (common.getCookie(common.dataKey)) {
+    store.commit('setToken', common.getCookie(common.dataKey))
 }
 const defaultTitle = '首页'
 // 利用vue-router提供的钩子函数beforeEach()对路由进行判断

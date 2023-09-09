@@ -12,21 +12,23 @@
                 <el-submenu v-if="item.children && item.children.length>0" :key="index" :index="'menu-'+index">
                     <template slot="title">
                         <i :class="item.icon"></i>
-                        <span slot="title">{{item.title}}</span>
+                        <span slot="title">{{item.name}}</span>
                     </template>
-                    <el-menu-item v-for="(children, sub) in item.children" :key="sub" :index="children.index">
-                        <span slot="title">{{children.title}}</span>
+                    <el-menu-item v-for="(children, sub) in item.children" :key="sub" :index="children.value">
+                        <span slot="title">{{children.name}}</span>
                     </el-menu-item>
                 </el-submenu>
-                <el-menu-item v-else :key="index" :index="item.index">
+                <el-menu-item v-else  :index="item.index" :key="index">
                     <i :class="item.icon"></i>
-                    <span slot="title">{{item.title}}</span>
+                    <span slot="title">{{item.name}}</span>
                 </el-menu-item>
             </template>
         </el-menu>
     </div>
 </template>
 <script>
+import api from '../util/api';
+import common from "@/util/common";
 export default {
     name: 'Left',
     props:{
@@ -64,9 +66,15 @@ export default {
         };
     },
     mounted(){
-        this.active = this.$route.path;
+        this.active = common.getCookie('_LASTPATH')
+        this.init()
     },
     methods: {
+        init(){
+            api.adminMenu().then((res) => {
+                this.menus = res.data.menus
+            })
+        },
         select(index,indexPath){
             this.active = index;
         }
@@ -90,9 +98,12 @@ export default {
 .left{border-right:1px solid #e8e8e8;}
 .left .logo{
     height: 55px;
-    line-height: 55px;
     text-align: center;
     font-size: 20px;
     border-bottom: 1px solid #e8e8e8;
+    img{
+        margin-top: 15px;
+        height: 30px;
+    }
 }
 </style>

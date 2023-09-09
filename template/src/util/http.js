@@ -34,14 +34,18 @@ axios.interceptors.request.use(config => {
  **/
 axios.interceptors.response.use(response => {
   store.dispatch('closeLoading')
-  return response
+  return Promise.resolve(response)
 }, error => {
   if (error.code === 'ECONNABORTED'){
     Message.closeAll();
     Message.error('请求超时，请重新尝试！')
   }
   store.dispatch('closeLoading')
-  return Promise.resolve(error)
+  let response = error.response || error
+  console.log(response)
+  Message.closeAll()
+  Message.error(response?.data?.msg|| '服务器错误，请稍后尝试！')
+  return Promise.reject(response)
 })
 
 /**
@@ -49,79 +53,49 @@ axios.interceptors.response.use(response => {
  * @param {object} response 响应对象
  * @return {object} 响应正常就返回响应数据否则返回错误信息
  **/
-function checkStatus (response) {
+function checkStatus (response, resolve, reject) {
   // 如果状态码正常就直接返回数据,响应正确，code === 0
   if ( response && ( response.code === 0 ) ) {
-    return response; // 直接返回http response响应的data,此data会后端返回的数据数据对象，包含后端自定义的code,message,data属性
+    return resolve(response) // 直接返回http response响应的data,此data会后端返回的数据数据对象，包含后端自定义的code,message,data属性
   }else{
     let res = response.data||response;
-    if(typeof(res)=='string'){
-      try {
-        res = JSON.parse(res)
-      } catch (error) {
-        console.log('返回错误'+error)
-      }
-    }
     if(res.msg == 'Signature has expired' || res.code == 1001 ){
-      res.msg = '用户过期';
-      common.delCookie('_KEYDATA');
-      store.commit('setToken',undefined);
-      window.location.href = '/#/login';
+      res.msg = '用户过期'
+      common.delCookie(common.dataKey)
+      store.commit('setToken',undefined)
+      window.location.href = '/index.html/#/login'
     }
-    if(res.msg == 'Wrong number of segments' && common.getCookie('_KEYDATA') == null ){
-        window.location.href = '/#/login';
+    if(res.msg == 'Wrong number of segments' && common.getCookie(common.dataKey) == null ){
+        window.location.href = '/index.html/#/login'
     }
-    let msg = res;
-    if(res.msg != undefined) msg = res.msg;
-    else msg = '未知错误';
-    if(msg.length>256){
-      console.error(msg);
-      msg = '服务错误，请联系管理员！';
-    }
-    if(res.code == 1003){
-      msg = JSON.stringify(res.msg);
-    }
-    Message.closeAll();
-    Message.error(msg);
-    console.error(res);
+    Message.closeAll()
+    Message.error(msg)
+    console.error(msg)
+    return reject(res)
   }
-  throw response;//抛出异常不继续往下走
 }
 
-axios.defaults.baseURL = '/';
-axios.defaults.timeout = 60000;
+axios.defaults.timeout = 60000
 
 export default {
   post (url, data) {
-    return axios({
-      method: 'post',
-      url: url,
-      data: data,
-    }).then((res) => {
-
-      let result = res.response || res.data;
-
-      return checkStatus(result)
-    
-
-    })
+    return new Promise((resolve, reject) => {
+        axios.post(common.baseUrl + url, data).then(res => {
+            return checkStatus(res.data, resolve, reject)
+        }).catch((err) => {})
+    });
   },
   get (url, params) {
-    return axios({
-      method: 'get',
-      url:url,
-      params,
-    }).then(
-      (res) => {
-        let result = res.response || res.data;
-        return checkStatus(result)
-      }
-    )
+    return new Promise((resolve, reject) => {
+      axios.get(common.baseUrl + url).then(res => {
+          return checkStatus(res.data, resolve, reject)
+      }).catch((err) => {})
+    })
   },
   download(url,params){
     return axios({
         method:'post',
-        url:url,
+        url: common.baseUrl + url,
         data:params,
         responseType: 'blob'
     }).then((res) => {
@@ -135,7 +109,7 @@ export default {
   upload(url,param){
     return axios({
       method: 'post',
-      url: url,
+      url: common.baseUrl + url,
       data:param,
       onUploadProgress:function(e){//添加上传进度监听事件,展示上传进度
           let complete = ((e.loaded / e.total * 100) | 0) + "%";

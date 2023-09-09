@@ -1,5 +1,6 @@
 import store from '@/store/index'
 export default {
+    dataKey: '_KEYDATA',
     cfmcfg:{confirmButtonText: '确定',cancelButtonText:'取消',type: 'warning'},
     //cookie 操作
     //s20是代表20秒
@@ -97,5 +98,13 @@ export default {
             }
         }
         return fmt;
+    },
+    serialize(obj) {
+        let queryList = Object.keys(obj).filter(key => {
+            return obj[key]
+        }).map(key => {
+            return key + '=' + encodeURIComponent(obj[key])
+        })
+        return queryList.join('&')
     }
 }
