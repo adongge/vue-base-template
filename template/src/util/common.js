@@ -1,5 +1,6 @@
 import store from '@/store/index'
 export default {
+    baseUrl: '/api',
     dataKey: '_KEYDATA',
     cfmcfg:{confirmButtonText: '确定',cancelButtonText:'取消',type: 'warning'},
     //cookie 操作
