@@ -4,7 +4,7 @@
             <div class="logo">
                 <img src="../assets/logo.png" alt="">
             </div>
-            <h1>流量业务管理平台</h1>
+            <h1> 管理系统 </h1>
             <el-form ref="form" :model="user" label-width="80px" :rules="rules">
                 <el-form-item label-width="0" prop="username">
                     <el-input
