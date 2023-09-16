@@ -36,32 +36,28 @@ axios.interceptors.response.use(response => {
   store.dispatch('closeLoading')
   return Promise.resolve(response)
 }, error => {
+  Message.closeAll();
   if (error.code === 'ECONNABORTED'){
-    Message.closeAll();
     Message.error('请求超时，请重新尝试！')
   }
-  store.dispatch('closeLoading')
   let response = error.response || error
 
   console.log(response)
-  Message.closeAll()
-  Message.error(response?.data?.msg|| '服务器错误，请稍后尝试！')
+  let res = response.data||response;
+  
+  if(res.msg == 'Signature has expired' || res.code == 1001 ){
+    res.msg = '用户过期'
+    common.delCookie(common.dataKey)
+    store.commit('setToken',undefined)
+    window.location.href = '/index.html/#/login'
+  }
+  if(res.msg == 'Wrong number of segments' && common.getCookie(common.dataKey) == null ){
+      window.location.href = '/index.html/#/login'
+  }
 
-  // setTimeout(() => {
+  Message.error(res?.msg|| '服务器错误，请稍后尝试！')
 
-  //   let res = response.data||response;
-  //   if(res.msg == 'Signature has expired' || res.code == 1001 ){
-  //     res.msg = '用户过期'
-  //     common.delCookie(common.dataKey)
-  //     store.commit('setToken',undefined)
-  //     window.location.href = '/index.html/#/login'
-  //   }
-  //   if(res.msg == 'Wrong number of segments' && common.getCookie(common.dataKey) == null ){
-  //       window.location.href = '/index.html/#/login'
-  //   }
-
-  // }, 1000)
-
+  store.dispatch('closeLoading')
   return Promise.reject(response)
 })
 
@@ -92,7 +88,7 @@ export default {
   },
   get (url, params) {
     return new Promise((resolve, reject) => {
-      axios.get(common.baseUrl + url).then(res => {
+      axios.get(common.baseUrl + url, {params}).then(res => {
           return checkStatus(res.data, resolve, reject)
       }).catch((err) => {})
     })

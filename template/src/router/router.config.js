@@ -15,9 +15,9 @@ const config = [
         children: [
             { path: '/helloworld', name: 'helloworld', component:HelloWorld, meta:{ title:'首页' } },
             { path: '/reference', name: 'reference', component:Reference, meta:{ title:'参考' } },
-
             { path: '/admin/admin', name: 'admin', component:Admin, meta:{ title:'管理员' } },
             { path: '/admin/role', name: 'role', component:Role, meta:{ title:'角色' } },
+            { path: '/admin/logs', name: 'logs', component:Logs, meta:{ title:'日志' } }
         ]
     },
     {
