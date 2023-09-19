@@ -25,7 +25,7 @@
                         v-model="user.password"
                         @keyup.enter.native="login"
                     >
-                    <i slot="suffix" class="el-input__icon el-icon-view" @click="changePwdIpt" ></i>
+                    <i slot="suffix" :class="'el-input__icon el-icon-view' + (passwordType=='text'?' view-text':'')" @click="changePwdIpt" ></i>
                     </el-input>
                 </el-form-item>
                 <div>
@@ -95,6 +95,9 @@ body{background-color: #eff2f5;}
     text-align: center;
     .el-icon-view{
         cursor: pointer;
+    }
+    .view-text{
+        color: #000000;
     }
 }
 </style>
