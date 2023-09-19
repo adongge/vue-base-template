@@ -45,15 +45,15 @@ axios.interceptors.response.use(response => {
   console.log(response)
   let res = response.data||response;
   
-  if(res.msg == 'Signature has expired' || res.code == 1001 ){
-    res.msg = '用户过期'
-    common.delCookie(common.dataKey)
-    store.commit('setToken',undefined)
-    window.location.href = '/index.html/#/login'
-  }
-  if(res.msg == 'Wrong number of segments' && common.getCookie(common.dataKey) == null ){
-      window.location.href = '/index.html/#/login'
-  }
+  // if(res.msg == 'Signature has expired' || res.code == 1001 ){
+  //   res.msg = '用户过期'
+  //   common.delCookie(common.dataKey)
+  //   store.commit('setToken',undefined)
+  //   window.location.href = '/index.html/#/login'
+  // }
+  // if(res.msg == 'Wrong number of segments' && common.getCookie(common.dataKey) == null ){
+  //     window.location.href = '/index.html/#/login'
+  // }
 
   Message.error(res?.msg|| '服务器错误，请稍后尝试！')
 
