@@ -38,7 +38,7 @@
 
 <script>
 import common from "@/util/common";
-import api from "@/util/api";
+import { api } from "@/api/system"
 import {mapMutations} from 'vuex'
 export default {
     name: 'Login',

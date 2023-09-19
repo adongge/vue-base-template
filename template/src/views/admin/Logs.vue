@@ -67,7 +67,7 @@
 </template>
   
 <script>
-import { api } from "@/api/system";
+import { api } from "@/api/system"
 import common from '@/util/common'
 import {datePicker} from '@/util/mixins/datePicker'
 export default {

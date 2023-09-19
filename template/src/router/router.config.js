@@ -6,6 +6,7 @@ import Reference from '@/components/Reference'
 
 import Admin from '@/views/admin/Admin'
 import Role from '@/views/admin/Role'
+import Logs from '@/views/admin/Logs'
 
 const config = [
     {

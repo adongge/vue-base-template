@@ -92,7 +92,7 @@
 </template>
   
 <script>
-import api from '@/util/api'
+import { api } from "@/api/system"
 import common from '@/util/common'
 export default {
   name: 'role',
