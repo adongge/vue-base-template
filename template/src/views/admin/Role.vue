@@ -43,7 +43,7 @@
       :page-size="pageSize" :total="total">
     </el-pagination>
 
-    <el-dialog title="更新角色" :visible.sync="dialogFormVisible" @close="diglogClose">
+    <el-dialog title="更新角色" :visible.sync="dialogFormVisible" @close="diglogClose" :close-on-click-modal="false">
       <el-form :model="form">
         <el-form-item label="角色名称">
           <el-input v-model="form.name" autocomplete="off"></el-input>
