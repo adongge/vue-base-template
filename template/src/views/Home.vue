@@ -10,6 +10,7 @@
                     {{ $route.meta.title }}
                 </div>
                 <div class="info">
+                    <span class="action" @click="dialogPwdVisible = true"><i class="el-icon-lock"></i>修改密码</span>
                     <span class="btn-user" @mousemove="act(true)" @mouseout="act(false)">
                         <i class="el-icon-user-solid"></i>
                         <div id="_act-menu" class="act-menu" v-show="showAct" >
@@ -26,6 +27,7 @@
     </div>
 </template>
 <script>
+import {api} from '@/api/system'
 import common from "@/util/common";
 import {mapMutations} from 'vuex';
 import Left from '@/components/Left.vue';
@@ -33,9 +35,36 @@ export default {
     name: "Home",
     components: {Left},
     data() {
+        var validatePassConfirm = (rule, value, callback) => {
+            if (value === '') {
+                callback(new Error('请确认新密码'));
+            } else if (value !== this.form.password) {
+                callback(new Error('两次输入密码不一致!'));
+            } else {
+                callback();
+            }
+        }
         return {
+            dialogPwdVisible: false,
             isCollapse: false,
             showAct: false,
+            form: {
+                old: '',
+                password: '',
+                confirm: ''
+            },
+            rules: {
+                old: [
+                    { required: true, message: '请输入旧密码', trigger: 'blur' }
+                ],
+                password: [
+                    { required: true, message: '请输入新密码', trigger: 'blur' }
+                ],
+                confirm: [
+                    { required: true, message: '请确认新密码', trigger: 'blur' },
+                    { validator: validatePassConfirm, trigger: 'blur'}
+                ]
+            }
         };
     },
     methods: {
@@ -57,6 +86,25 @@ export default {
                 console.log(err);
                 return Promise.resolve(err)
             });
+        },
+        updatePwd(){
+            this.$refs.pwdForm.validate((valid) => {
+                if (valid) {
+                    api.updatePwd({
+                        old: this.form.old,
+                        password: this.form.password,
+                        confirm: this.form.confirm
+                    }).then(() => {
+                        this.dialogPwdVisible = false
+                        this.form = {
+                            old: '',
+                            password: '',
+                            confirm: ''
+                        }
+                        this.$message.success('修改成功')
+                    })
+                }
+            })
         },
     }
 };
