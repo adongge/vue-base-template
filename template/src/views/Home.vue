@@ -81,7 +81,7 @@ export default {
             this.$confirm('确认要退出吗？', '提示',common.cfmcfg).then(() => {
                 common.delCookie(common.dataKey);
                 this.setToken(false);
-                window.location.href = '/index.html/#/login';
+                window.location.href = '/index.html#/login';
             }).catch((err) => {
                 console.log(err);
                 return Promise.resolve(err)
